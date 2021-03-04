@@ -102,7 +102,7 @@ By default, HTML form elements will refresh when a **Submit** input is clicked.
 Before we can run the code for fetching data, we need to override this behavior.
 
 In `./src/index.js`, we can do this by adding an event listener. Note that it
-already contains an event listener and a callback function, `init`:
+already contains one event listener and a callback function, `init`:
 
 ```js
 const init = () => {
@@ -143,9 +143,9 @@ inputForm.addEventListener('submit', (event) => {
 ```
 
 At this point, the form will still refresh automatically, as we haven't done
-anything yet. The `event` object that gets passed in to our callback contains a
-particular method we need in order to override our form's behavior —
-`preventDefault()`.
+anything to override that yet. The `event` object that gets passed in to our
+callback contains a particular method we need in order to override our form's
+behavior — `preventDefault()`.
 
 ```js
 const init = () => {
@@ -268,7 +268,7 @@ const init = () => {
     .then(response => response.json())
     .then(data => {
       console.log(data);
-      // => (3) [{…}, {…}, {…}]
+      // LOG: (3) [{…}, {…}, {…}]
     });
   });
 }
