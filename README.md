@@ -9,13 +9,13 @@
 ## Introduction
 
 In the previous lab, we accessed a remote API on page load and populated some
-content. This is a common practice in modern web development - when you visit a
+content. This is a common practice in modern web development — when you visit a
 website, that site may fetch data from a variety of places right as the page
 loads. Sites often retrieve data from a backend (like your account info) while
 also retrieving data from other sources like APIs. From a user's perspective, it
 all just loads when they visit the site.
 
-Now, we're going to look at a slightly different scenario - retrieving data based
+Now, we're going to look at a slightly different scenario — retrieving data based
 on user input.
 
 The underlying code isn't much different than what we've seen. We'll pass a
@@ -29,7 +29,7 @@ get specific data from our API.
 
 Imagine you've been hired to help build the frontend for a movie database
 company specializing in kids movies. Some initial work has already been done for
-you - we have an API with some starter data, some initial HTML, but very little
+you — we have an API with some starter data, some initial HTML, but very little
 JavaScript.
 
 ## Getting Started
@@ -144,7 +144,7 @@ inputForm.addEventListener('submit', (event) => {
 
 At this point, the form will still refresh automatically, as we haven't done
 anything yet. The `event` object that gets passed in to our callback contains a
-particular method we need in order to override our form's behavior -
+particular method we need in order to override our form's behavior —
 `preventDefault()`.
 
 ```js
@@ -279,7 +279,7 @@ If everything is working, you should see an array of three objects logged in the
 console using the code above.
 
 These three objects represent the three 'records' available from the movies API.
-In our example, this is enough for us to move on - we have our user input
+In our example, this is enough for us to move on — we have our user input
 accessible in `input.value`, and each object has an `id` property. We could
 now iterate over the data and find a match between `input.value` and `id`.
 
@@ -327,7 +327,7 @@ Now, if you type a valid ID into the form, a specific movie object will be
 logged!
 
 **Note:** What happens when you enter an _invalid_ ID? In the console, you
-should see a `404` error. Something to think about as you continue to learn -
+should see a `404` error. Something to think about as you continue to learn —
 what are some ways you might _handle_ an invalid request?
 
 ## Display Fetched Data on the Page
