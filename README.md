@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', init);
 
 We want to make sure the JavaScript we write executes when the DOM is fully
 loaded. Any code related to DOM manipulation should either go in `init` or in a
-function called within `init`. 
+function called within `init`.
 
 In our case, we want to add an event listener to the `form` element. We would first
 target the DOM element we want:
@@ -281,8 +281,8 @@ console using the code above.
 
 These three objects represent the three 'records' available from the movies API.
 In our example, this is enough for us to move on — we have our user input
-accessible in `input.value`, and each object has an `id` property. We could
-now iterate over the data and find a match between `input.value` and `id`.
+accessible in `input.value`, and each object in `data` has an `id` property. We
+could now iterate over `data` and find a match between `input.value` and `id`.
 
 However, it isn't usually the case that we want to get _all_ records from an API
 or server. It would be helpful if we could have _the 'server'_ do that work for
@@ -420,9 +420,9 @@ this won't be the case for all events, we also overrode HTML's default behavior.
 
 ## Resources
 
-* [`addEventListener()`][eventlisteners]
-* [`event.target`][eventtarget]
-* [`HTMLCollection`][htmlcollection]
+- [`addEventListener()`][eventlisteners]
+- [`event.target`][eventtarget]
+- [`HTMLCollection`][htmlcollection]
 
 [htmlcollection]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 [eventtarget]: https://developer.mozilla.org/en-US/docs/Web/API/Event/target
