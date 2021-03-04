@@ -168,7 +168,7 @@ to do something else instead. We can confirm everything is working by adding a
 inputForm.addEventListener('submit', (event) => {
     event.preventDefault();
     console.log(event);
-  })
+  });
 ```
 
 With dev tools open in the browser, if you enter some text and submit the form,
@@ -239,7 +239,7 @@ inputForm.addEventListener('submit', (event) => {
   const input = document.querySelector('input#searchByID');
   
   console.log(input.value);
-})
+});
 ```
 
 Both options work for getting the value we need. For now, we'll use the code
@@ -267,7 +267,7 @@ const init = () => {
     fetch('http://localhost:3000/movies')
     .then(response => response.json())
     .then(data => {
-      console.log(data)
+      console.log(data);
       // => (3) [{…}, {…}, {…}]
     });
   });
@@ -355,7 +355,7 @@ fetch(`http://localhost:3000/movies/${input.value}`)
   .then(data => {
     const title = document.querySelector('section#movieDetails h4');
     const summary = document.querySelector('section#movieDetails p');
-  })
+  });
 ```
 
 Here again, we could access these elements in many ways, this is just one way to
@@ -374,7 +374,7 @@ fetch(`http://localhost:3000/movies/${input.value}`)
     
     title.innerText = data.title;
     summary.innerText = data.summary;
-  })
+  });
 ```
 
 All together, our code looks like this:
@@ -384,22 +384,22 @@ const init = () => {
   const inputForm = document.querySelector('form')
 
   inputForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const input = document.querySelector('input#searchByID')
+    event.preventDefault();
+    const input = document.querySelector('input#searchByID');
   
     fetch(`http://localhost:3000/movies/${input.value}`)
     .then(response => response.json())
     .then(data => {
-      const title = document.querySelector('section#movieDetails h4')
-      const summary = document.querySelector('section#movieDetails p')
+      const title = document.querySelector('section#movieDetails h4');
+      const summary = document.querySelector('section#movieDetails p');
   
-      title.innerText = data.title
-      summary.innerText = data.summary
-    })
-  })
+      title.innerText = data.title;
+      summary.innerText = data.summary;
+    });
+  });
 }
 
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init);
 ```
 
 In the browser, if we type `1` into the form, we should see info on the **Brave
