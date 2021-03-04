@@ -28,9 +28,9 @@ get specific data from our API.
 ## Scenario
 
 Imagine you've been hired to help build the frontend for a movie database
-company specializing in kids movies. Some initial work has already been done for
-you — we have an API with some starter data, some initial HTML, but very little
-JavaScript.
+company specializing in kids' movies. Some initial work has already been done
+for you — we have an API with some starter data and some initial HTML, but very
+little JavaScript.
 
 ## Getting Started
 
@@ -44,7 +44,7 @@ Leave the server running for now. Open a second terminal window and navigate to
 this assignment again. We'll use this second window to open files in your
 browser or text editor while the server is running.
 
-Open `index.html` in your text editor and in the browswer (`open index.html` for
+Open `index.html` in your text editor and in the browser (`open index.html` for
 Mac, `explorer.exe index.html` for WSL). With everything set up, we can take a
 look at the HTML we currently have.
 
@@ -85,10 +85,10 @@ with their IDs for our convenience. Below these is a form.
 ```
 
 This form doesn't do much at the moment. In the browser, if we type something
-in try to submit, our input just disappears.
+in and try to submit, our input just disappears.
 
 Your primary task will be to get this form working. When a user inputs a valid
-ID, the Movie information should appear on the page.
+ID, the movie information should appear on the page.
 
 Doing this will involve a few steps:
 
@@ -101,15 +101,15 @@ Doing this will involve a few steps:
 By default, HTML form elements will refresh when a **Submit** input is clicked.
 Before we can run the code for fetching data, we need to override this behavior.
 
-In `./src/index.js`, we can do this by adding an event listener. Note that is
-already an event listener and callback function, `init`:
+In `./src/index.js`, we can do this by adding an event listener. Note that it
+already contains an event listener and a callback function, `init`:
 
 ```js
 const init = () => {
 
 }
 
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init);
 ```
 
 We want to make sure the JavaScript we write executes when the DOM is fully
@@ -120,13 +120,13 @@ In our case, we want to add an event listener to the `form` element. We would fi
 target the DOM element we want:
 
 ```js
-const inputForm = document.querySelector('form')
+const inputForm = document.querySelector('form');
 ```
 
-Then, we'll need to add an event listener to the form, current represented by
+Then, we'll need to add an event listener to the form, currently represented by
 `inputForm` in our code.
 
-[Event listeners](eventlisteners) require two arguments, the _type_ of event, a
+[Event listeners](eventlisteners) require two arguments: the _type_ of event, a
 string, and the _listener_, a callback function. In our case, we'll want to pass
 in `'submit'` as the type. For the listener, we need to provide a callback
 function that will be called to 'handle' the event.
@@ -139,7 +139,7 @@ object in a variable:
 ```js
 inputForm.addEventListener('submit', (event) => {
 
-})
+});
 ```
 
 At this point, the form will still refresh automatically, as we haven't done
@@ -149,15 +149,15 @@ particular method we need in order to override our form's behavior —
 
 ```js
 const init = () => {
-  const inputForm = document.querySelector('form')
+  const inputForm = document.querySelector('form');
 
   inputForm.addEventListener('submit', (event) => {
-    event.preventDefault()
+    event.preventDefault();
 
-  })
+  });
 }
 
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init);
 ```
 
 Calling this inside our callback will stop the page from refreshing and allow us
@@ -166,8 +166,8 @@ to do something else instead. We can confirm everything is working by adding a
 
 ```js
 inputForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-    console.log(event)
+    event.preventDefault();
+    console.log(event);
   })
 ```
 
@@ -186,16 +186,17 @@ There are two ways we can get this value:
 ### Access Input Value from an Event Object
 
 To get the value from our `event` object, we first want to access
-[`event.target`][eventtarget]. `event.target` returns the DOM element targetted
-by our event, a `<form>` in our case. 
+[`event.target`][eventtarget]. `event.target` returns the DOM element targeted
+by our event, a `<form>` in our case.
 
 ```js
 event.target
 // => <form>..</form>
 ```
 
-`event.target` has a property, `children`, that returns all the nested elements
-of the `event.target` element (in an [`HTMLCollection`][htmlcollection]).
+`event.target` has a property, `children`, that returns an
+[`HTMLCollection`][htmlcollection] containing all the nested elements of the
+`event.target` element.
 
 ```js
 event.target.children
@@ -234,10 +235,10 @@ value we need. We can also choose to access the `input` element directly.
 
 ```js
 inputForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  const input = document.querySelector('input#searchByID')
+  event.preventDefault();
+  const input = document.querySelector('input#searchByID');
   
-  console.log(input.value) // both logs return the same value
+  console.log(input.value);
 })
 ```
 
@@ -255,24 +256,24 @@ is working and we can connect to the JSON server, we'll send a basic request to
 
 ```js
 const init = () => {
-  const inputForm = document.querySelector('form')
+  const inputForm = document.querySelector('form');
 
   inputForm.addEventListener('submit', (event) => {
-    event.preventDefault()
-    const input = document.querySelector('input#searchByID')
+    event.preventDefault();
+    const input = document.querySelector('input#searchByID');
 
-    console.log(input.value)
+    console.log(input.value);
 
     fetch('http://localhost:3000/movies')
     .then(response => response.json())
     .then(data => {
       console.log(data)
       // => (3) [{…}, {…}, {…}]
-    })
-  })
+    });
+  });
 }
 
-document.addEventListener('DOMContentLoaded', init)
+document.addEventListener('DOMContentLoaded', init);
 ```
 
 If everything is working, you should see an array of three objects logged in the
@@ -312,15 +313,15 @@ to do this:
 
 ```js
 inputForm.addEventListener('submit', (event) => {
-  event.preventDefault()
-  const input = document.querySelector('input#searchByID')
+  event.preventDefault();
+  const input = document.querySelector('input#searchByID');
 
   fetch(`http://localhost:3000/movies/${input.value}`)
   .then(response => response.json())
   .then(data => {
-    console.log(data)
-  })
-})
+    console.log(data);
+  });
+});
 ```
 
 Now, if you type a valid ID into the form, a specific movie object will be
@@ -352,15 +353,15 @@ and store the two elements in JavaScript
 fetch(`http://localhost:3000/movies/${input.value}`)
   .then(response => response.json())
   .then(data => {
-    const title = document.querySelector('section#movieDetails h4')
-    const summary = document.querySelector('section#movieDetails p')
+    const title = document.querySelector('section#movieDetails h4');
+    const summary = document.querySelector('section#movieDetails p');
   })
 ```
 
 Here again, we could access these elements in many ways, this is just one way to
 approach it. We could add `id` attributes to the `h4` and `p` tags directly.
 
-Next, we want to change to contents of our `title` and `summary` elements based
+Next, we want to change the contents of our `title` and `summary` elements based
 on the retrieved data. We can do this by setting their `innerText` values to the
 appropriate values in our data:
 
@@ -368,11 +369,11 @@ appropriate values in our data:
 fetch(`http://localhost:3000/movies/${input.value}`)
   .then(response => response.json())
   .then(data => {
-    const title = document.querySelector('section#movieDetails h4')
-    const summary = document.querySelector('section#movieDetails p')
+    const title = document.querySelector('section#movieDetails h4');
+    const summary = document.querySelector('section#movieDetails p');
     
-    title.innerText = data.title
-    summary.innerText = data.summary
+    title.innerText = data.title;
+    summary.innerText = data.summary;
   })
 ```
 
@@ -409,7 +410,7 @@ successfully fetching data _on demand!_
 
 A core aspect of the modern JavaScript-based web is that web pages can
 dynamically update their content as a user interacts with it. When a user adds a
-comment, adds an emoji response, etc.. refreshing the page isn't a great
+comment, adds an emoji response, etc., refreshing the page isn't a great
 experience.
 
 In this lesson, we've gone through the basic mechanisms for providing a better
