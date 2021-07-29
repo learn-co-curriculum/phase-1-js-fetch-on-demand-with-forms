@@ -35,8 +35,7 @@ little JavaScript.
 ## Getting Started
 
 First, let's get the JSON server up and running in the background. From inside
-this assignment's local directory, run `npm install`. When NPM finishes
-installing the necessary packages, run `json-server --watch db.json` to start
+this assignment's local directory, run `json-server --watch db.json` to start
 the JSON server. In your browser, you can verify the server is running by
 navigating to `http://localhost:3000/movies` to see the API data.
 
