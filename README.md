@@ -278,6 +278,15 @@ document.addEventListener('DOMContentLoaded', init);
 If everything is working, you should see an array of three objects logged in the
 console using the code above.
 
+> **Note**: For users of the [Live Server VSCode extension][live-server], if the 
+> page is reloading when you initiate the fetch request above, you'll need to 
+> set up some additional configuration for Live Server to play nicely with 
+> `json-server`. Follow the steps in [this gist][live-server settings] (you'll 
+> only need to do this once), then come back to this lesson.
+
+[live-server]: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+[live-server settings]: https://gist.github.com/ihollander/cc5f36c6447d15dea6a16f68d82aacf7
+
 These three objects represent the three 'records' available from the movies API.
 In our example, this is enough for us to move on — we have our user input
 accessible in `input.value`, and each object in `data` has an `id` property. We
