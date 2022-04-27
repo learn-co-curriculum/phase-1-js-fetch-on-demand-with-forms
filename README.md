@@ -125,7 +125,7 @@ const inputForm = document.querySelector('form');
 Then, we'll need to add an event listener to the form, currently represented by
 `inputForm` in our code.
 
-[Event listeners](eventlisteners) require two arguments: the _type_ of event, a
+[Event listeners][event-listeners] require two arguments: the _type_ of event, a
 string, and the _listener_, a callback function. In our case, we'll want to pass
 in `'submit'` as the type. For the listener, we need to provide a callback
 function that will be called to 'handle' the event.
@@ -185,7 +185,7 @@ There are two ways we can get this value:
 ### Access Input Value from an Event Object
 
 To get the value from our `event` object, we first want to access
-[`event.target`][eventtarget]. `event.target` returns the DOM element targeted
+[`event.target`][event-target]. `event.target` returns the DOM element targeted
 by our event, a `<form>` in our case.
 
 ```js
@@ -194,7 +194,7 @@ event.target
 ```
 
 `event.target` has a property, `children`, that returns an
-[`HTMLCollection`][htmlcollection] containing all the nested elements of the
+[`HTMLCollection`][html-collection] containing all the nested elements of the
 `event.target` element.
 
 ```js
@@ -428,10 +428,10 @@ this won't be the case for all events, we also overrode HTML's default behavior.
 
 ## Resources
 
-- [`addEventListener()`][eventlisteners]
-- [`event.target`][eventtarget]
-- [`HTMLCollection`][htmlcollection]
+- [`addEventListener()`][event-listeners]
+- [`event.target`][event-target]
+- [`HTMLCollection`][html-collection]
 
-[htmlcollection]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
-[eventtarget]: https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-[eventlisteners]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+[html-collection]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
+[event-target]: https://developer.mozilla.org/en-US/docs/Web/API/Event/target
+[event-listeners]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
