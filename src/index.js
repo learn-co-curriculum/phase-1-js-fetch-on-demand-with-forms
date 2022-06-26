@@ -17,6 +17,7 @@ const init = () => {
             summary.innerText = data.summary;
         });
         console.log(input.value);
+        
       });
 }
 
