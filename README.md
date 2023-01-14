@@ -15,8 +15,8 @@ loads. Sites often retrieve data from a backend (like your account info) while
 also retrieving data from other sources like APIs. From a user's perspective, it
 all just loads when they visit the site.
 
-Now, we're going to look at a slightly different scenario — retrieving data based
-on user input.
+Now, we're going to look at a slightly different scenario — retrieving data
+based on user input.
 
 The underlying code isn't much different than what we've seen. We'll pass a
 function into an event listener that, when called, sends a `fetch` request, then
@@ -53,45 +53,46 @@ In `index.html`, the movies from our database are currently hard-coded along
 with their IDs for our convenience. Below these is a form.
 
 ```html
-  <h2>Movies Database</h2>
-  
-  <ul>
-    <li>
-      <h3>The Brave Little Toaster</h3>
-      <div>ID: 1</div>
-    </li>
-    <li>
-      <h3>The Princess Bride</h3>
-      <div>ID: 2</div>
-    </li>
-    <li>
-      <h3>Spirited Away</h3>
-      <div>ID: 3</div>
-    </li>
-  </ul>
+<h2>Movies Database</h2>
 
-  <section>
-    <form>
-      <label for="searchByID">Search By ID</label>
-      <input id="searchByID" type="text" placeholder="Enter ID here"/>
-      <input type="submit" />
-    </form>
-  </section>
-  <section id="movieDetails">
-    <h4>Title</h4>
-    <p>Summary</p>
-  </section>
+<ul>
+  <li>
+    <h3>The Brave Little Toaster</h3>
+    <div>ID: 1</div>
+  </li>
+  <li>
+    <h3>The Princess Bride</h3>
+    <div>ID: 2</div>
+  </li>
+  <li>
+    <h3>Spirited Away</h3>
+    <div>ID: 3</div>
+  </li>
+</ul>
+
+<section>
+  <form>
+    <label for="searchByID">Search By ID</label>
+    <input id="searchByID" type="text" placeholder="Enter ID here" />
+    <input type="submit" />
+  </form>
+</section>
+<section id="movieDetails">
+  <h4>Title</h4>
+  <p>Summary</p>
+</section>
 ```
 
-This form doesn't do much at the moment. In the browser, if we type something
-in and try to submit, our input just disappears.
+This form doesn't do much at the moment. In the browser, if we type something in
+and try to submit, our input just disappears.
 
 Your primary task will be to get this form working. When a user inputs a valid
 ID, the movie information should appear on the page.
 
 Doing this will involve a few steps:
 
-- Add event listeners to capture form data and override a form's default behavior
+- Add event listeners to capture form data and override a form's default
+  behavior
 - Fetch data based on what the user types into that form
 - Display that data on the page
 
@@ -104,22 +105,20 @@ In `./src/index.js`, we can do this by adding an event listener. Note that it
 already contains one event listener and a callback function, `init`:
 
 ```js
-const init = () => {
+const init = () => {};
 
-}
-
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", init);
 ```
 
 We want to make sure the JavaScript we write executes when the DOM is fully
 loaded. Any code related to DOM manipulation should either go in `init` or in a
 function called within `init`.
 
-In our case, we want to add an event listener to the `form` element. We would first
-target the DOM element we want:
+In our case, we want to add an event listener to the `form` element. We would
+first target the DOM element we want:
 
 ```js
-const inputForm = document.querySelector('form');
+const inputForm = document.querySelector("form");
 ```
 
 Then, we'll need to add an event listener to the form, currently represented by
@@ -136,9 +135,7 @@ expect this to happen and can write a parameter in our code to store the event
 object in a variable:
 
 ```js
-inputForm.addEventListener('submit', (event) => {
-
-});
+inputForm.addEventListener("submit", (event) => {});
 ```
 
 At this point, the form will still refresh automatically, as we haven't done
@@ -148,15 +145,14 @@ behavior — `preventDefault()`.
 
 ```js
 const init = () => {
-  const inputForm = document.querySelector('form');
+  const inputForm = document.querySelector("form");
 
-  inputForm.addEventListener('submit', (event) => {
+  inputForm.addEventListener("submit", (event) => {
     event.preventDefault();
-
   });
-}
+};
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", init);
 ```
 
 Calling this inside our callback will stop the page from refreshing and allow us
@@ -164,10 +160,10 @@ to do something else instead. We can confirm everything is working by adding a
 `console.log` in our callback:
 
 ```js
-inputForm.addEventListener('submit', (event) => {
-    event.preventDefault();
-    console.log(event);
-  });
+inputForm.addEventListener("submit", (event) => {
+  event.preventDefault();
+  console.log(event);
+});
 ```
 
 With dev tools open in the browser, if you enter some text and submit the form,
@@ -189,7 +185,7 @@ To get the value from our `event` object, we first want to access
 by our event, a `<form>` in our case.
 
 ```js
-event.target
+event.target;
 // => <form>..</form>
 ```
 
@@ -198,7 +194,7 @@ event.target
 `event.target` element.
 
 ```js
-event.target.children
+event.target.children;
 // => HTMLCollection(3) [label, input#searchByID, input, searchByID: input#searchByID]
 ```
 
@@ -207,7 +203,7 @@ Looking at the form, we can see we want to access the _second_ element:
 ```html
 <form>
   <label for="searchByID">Search By ID</label>
-  <input id="searchByID" type="text" placeholder="Enter ID here"/>
+  <input id="searchByID" type="text" placeholder="Enter ID here" />
   <input type="submit" />
 </form>
 ```
@@ -215,14 +211,14 @@ Looking at the form, we can see we want to access the _second_ element:
 So we access this element via its index:
 
 ```js
-event.target.children[1]
+event.target.children[1];
 // => <input id="searchByID" type="text" placeholder="Enter ID here">
 ```
 
 And to get the input value, we use the `value` attribute
 
 ```js
-event.target.children[1].value
+event.target.children[1].value;
 // => whatever you typed into the input
 ```
 
@@ -233,10 +229,10 @@ refreshing. However, we don't necessarily need to use the `event` to get the
 value we need. We can also choose to access the `input` element directly.
 
 ```js
-inputForm.addEventListener('submit', (event) => {
+inputForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const input = document.querySelector('input#searchByID');
-  
+  const input = document.querySelector("input#searchByID");
+
   console.log(input.value);
 });
 ```
@@ -244,35 +240,35 @@ inputForm.addEventListener('submit', (event) => {
 Both options work for getting the value we need. For now, we'll use the code
 above.
 
-With this data, and the default form behavior overridden, we can set up a `fetch`
-request.
+With this data, and the default form behavior overridden, we can set up a
+`fetch` request.
 
 ## Fetch Data Based on User Input
 
-Let's first set up the basic shell of our `fetch` request. To make sure everything
-is working and we can connect to the JSON server, we'll send a basic request to
-`'http://localhost:3000/movies'`:
+Let's first set up the basic shell of our `fetch` request. To make sure
+everything is working and we can connect to the JSON server, we'll send a basic
+request to `'http://localhost:3000/movies'`:
 
 ```js
 const init = () => {
-  const inputForm = document.querySelector('form');
+  const inputForm = document.querySelector("form");
 
-  inputForm.addEventListener('submit', (event) => {
+  inputForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const input = document.querySelector('input#searchByID');
+    const input = document.querySelector("input#searchByID");
 
     console.log(input.value);
 
-    fetch('http://localhost:3000/movies')
-    .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      // LOG: (3) [{…}, {…}, {…}]
-    });
+    fetch("http://localhost:3000/movies")
+      .then((response) => response.json())
+      .then((data) => {
+        console.log(data);
+        // LOG: (3) [{…}, {…}, {…}]
+      });
   });
-}
+};
 
-document.addEventListener('DOMContentLoaded', init);
+document.addEventListener("DOMContentLoaded", init);
 ```
 
 If everything is working, you should see an array of three objects logged in the
@@ -284,8 +280,10 @@ console using the code above.
 > `json-server`. Follow the steps in [this gist][live-server settings] (you'll
 > only need to do this once), then come back to this lesson.
 
-[live-server]: https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
-[live-server settings]: https://gist.github.com/ihollander/cc5f36c6447d15dea6a16f68d82aacf7
+[live-server]:
+  https://marketplace.visualstudio.com/items?itemName=ritwickdey.LiveServer
+[live-server settings]:
+  https://gist.github.com/ihollander/cc5f36c6447d15dea6a16f68d82aacf7
 
 These three objects represent the three 'records' available from the movies API.
 In our example, this is enough for us to move on — we have our user input
@@ -316,19 +314,19 @@ Similarly, if we pass this URL into our `fetch` request, we'll get this single
 object in return.
 
 We need to modify the URL we pass to our `fetch` function based on the input
-typed into the HTML form. Using interpolation, we can adapt our existing code
-to do this:
+typed into the HTML form. Using interpolation, we can adapt our existing code to
+do this:
 
 ```js
-inputForm.addEventListener('submit', (event) => {
+inputForm.addEventListener("submit", (event) => {
   event.preventDefault();
-  const input = document.querySelector('input#searchByID');
+  const input = document.querySelector("input#searchByID");
 
   fetch(`http://localhost:3000/movies/${input.value}`)
-  .then(response => response.json())
-  .then(data => {
-    console.log(data);
-  });
+    .then((response) => response.json())
+    .then((data) => {
+      console.log(data);
+    });
 });
 ```
 
@@ -359,10 +357,10 @@ we'll access the DOM and store the two elements in JavaScript
 
 ```js
 fetch(`http://localhost:3000/movies/${input.value}`)
-  .then(response => response.json())
-  .then(data => {
-    const title = document.querySelector('section#movieDetails h4');
-    const summary = document.querySelector('section#movieDetails p');
+  .then((response) => response.json())
+  .then((data) => {
+    const title = document.querySelector("section#movieDetails h4");
+    const summary = document.querySelector("section#movieDetails p");
   });
 ```
 
@@ -375,11 +373,11 @@ appropriate values in our data:
 
 ```js
 fetch(`http://localhost:3000/movies/${input.value}`)
-  .then(response => response.json())
-  .then(data => {
-    const title = document.querySelector('section#movieDetails h4');
-    const summary = document.querySelector('section#movieDetails p');
-    
+  .then((response) => response.json())
+  .then((data) => {
+    const title = document.querySelector("section#movieDetails h4");
+    const summary = document.querySelector("section#movieDetails p");
+
     title.innerText = data.title;
     summary.innerText = data.summary;
   });
@@ -389,30 +387,37 @@ All together, our code looks like this:
 
 ```js
 const init = () => {
-  const inputForm = document.querySelector('form')
+  const inputForm = document.querySelector("form");
 
-  inputForm.addEventListener('submit', (event) => {
+  inputForm.addEventListener("submit", (event) => {
     event.preventDefault();
-    const input = document.querySelector('input#searchByID');
-  
-    fetch(`http://localhost:3000/movies/${input.value}`)
-    .then(response => response.json())
-    .then(data => {
-      const title = document.querySelector('section#movieDetails h4');
-      const summary = document.querySelector('section#movieDetails p');
-  
-      title.innerText = data.title;
-      summary.innerText = data.summary;
-    });
-  });
-}
+    const input = document.querySelector("input#searchByID");
 
-document.addEventListener('DOMContentLoaded', init);
+    fetch(`http://localhost:3000/movies/${input.value}`)
+      .then((response) => response.json())
+      .then((data) => {
+        const title = document.querySelector("section#movieDetails h4");
+        const summary = document.querySelector("section#movieDetails p");
+
+        title.innerText = data.title;
+        summary.innerText = data.summary;
+      });
+  });
+};
+
+document.addEventListener("DOMContentLoaded", init);
 ```
 
 In the browser, if we type `1` into the form, we should see info on the **Brave
 Little Toaster**. Type `2`, and we get **The Princess Bride**. We're
 successfully fetching data _on demand!_
+
+## Submit Using CodeGrade
+
+Once you're done, be sure to commit and push your code up to GitHub, then submit
+the assignment using CodeGrade. Even though this code-along does not have tests,
+it must still be submitted through CodeGrade in order to be marked as complete
+in Canvas.
 
 ## Conclusion
 
@@ -432,6 +437,8 @@ this won't be the case for all events, we also overrode HTML's default behavior.
 - [`event.target`][event-target]
 - [`HTMLCollection`][html-collection]
 
-[html-collection]: https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
+[html-collection]:
+  https://developer.mozilla.org/en-US/docs/Web/API/HTMLCollection
 [event-target]: https://developer.mozilla.org/en-US/docs/Web/API/Event/target
-[event-listeners]: https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
+[event-listeners]:
+  https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener
